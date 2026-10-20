@@ -1,0 +1,35 @@
+services:
+  database:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: eventbridge
+      POSTGRES_PASSWORD: eventbridge
+      POSTGRES_DB: eventbridge
+    ports:
+      - "5432:5432"
+    volumes:
+      - eventbridge-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U eventbridge -d eventbridge"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+  app:
+    build: .
+    depends_on:
+      database:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      DATABASE_URL: postgres://eventbridge:eventbridge@database:5432/eventbridge
+      WEBHOOK_SECRET: local-webhook-secret
+      ADMIN_PASSWORD: local-admin-password
+      SESSION_SECRET: local-session-secret-change-me
+
+volumes:
+  eventbridge-data:
+

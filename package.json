@@ -1,0 +1,22 @@
+{
+  "name": "eventbridge",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A durable webhook listener, processing pipeline, and live monitoring dashboard.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "test": "node --test",
+    "check": "node --check src/server.js && node --check src/db.js && node --check src/pipeline.js && node --check src/auth.js && node --check src/validation.js && node --check src/downstream.js && node --check public/app.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "express": "^5.1.0",
+    "pg": "^8.16.3"
+  }
+}
+
