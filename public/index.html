@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EventBridge Monitor</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div>
+        <p class="eyebrow">WEBHOOK OPERATIONS</p>
+        <h1>EventBridge</h1>
+        <p class="subtitle">A durable event intake and live processing monitor.</p>
+      </div>
+      <div class="connection"><span id="connection-dot" class="dot offline"></span><span id="connection-label">Connecting…</span></div>
+    </header>
+
+    <main class="layout">
+      <section class="panel events-panel">
+        <div class="panel-heading">
+          <div><p class="eyebrow">PUBLIC ACTIVITY</p><h2>Incoming events</h2></div>
+          <span id="event-count" class="count">0</span>
+        </div>
+        <p class="muted">This list intentionally excludes payload contents. Select an event after signing in to inspect it.</p>
+        <div id="events" class="event-list"><div class="empty">Waiting for the first webhook…</div></div>
+      </section>
+
+      <aside class="side-column">
+        <section class="panel auth-panel">
+          <div class="panel-heading"><div><p class="eyebrow">PRIVATE VIEWER</p><h2>Admin access</h2></div></div>
+          <form id="login-form">
+            <label for="password">Shared password</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" required />
+            <button type="submit">Sign in</button>
+          </form>
+          <div id="auth-state" class="auth-state">Not signed in. Payloads and retry controls are hidden.</div>
+          <button id="logout" class="secondary hidden" type="button">Sign out</button>
+        </section>
+
+        <section class="panel detail-panel">
+          <div class="panel-heading"><div><p class="eyebrow">EVENT DETAIL</p><h2 id="detail-title">Select an event</h2></div></div>
+          <div id="detail" class="detail-empty">Sign in, then select an event to view its stored payload and failure reason.</div>
+        </section>
+      </aside>
+    </main>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
+
